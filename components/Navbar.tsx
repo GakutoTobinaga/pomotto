@@ -23,7 +23,7 @@ export default function Navbar({
     { name: 'マイページ', href: '/mypage' },
   ];
   return (
-    <div className="backdrop-blur sticky top-0 shadow-sm bg-green-200/50 border border-green-200">
+    <div className="backdrop-blur sticky top-0 shadow-sm bg-green-200/50 border border-green-200 z-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex">
