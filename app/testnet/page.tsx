@@ -1,10 +1,11 @@
-import { createClient } from '@/utils/supabase/server';
-export default async function Notes() {
-  const supabase = createClient();
-  const { data: notes } = await supabase.from("notes").select();
-
+import Tomato from '@/components/logos/Tomato';
+import TomatoTimer from '@/components/timers/TomatoTimer';
+export default async function Testnet() {
   return (
     <>
-  <pre>{JSON.stringify(notes, null, 2)}</pre>
-  </>)
+      <TomatoTimer size="normal" color="red" />
+      <TomatoTimer size="mini" color="green" />
+      <TomatoTimer size="mini" color="yellow" />
+    </>
+  );
 }
