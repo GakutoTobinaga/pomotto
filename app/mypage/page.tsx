@@ -5,7 +5,7 @@ export default async function Notes() {
   // this file is still example datas.
   return (
     <>
-     <Example/>
+      <Example />
     </>
-  )
+  );
 }
