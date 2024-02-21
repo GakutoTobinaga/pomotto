@@ -35,12 +35,12 @@ return (
 <div className='timer min-h-screen flex flex-col items-center justify-center p-4'>
   <div className="timer-container bg-red-100 shadow-lg rounded-2xl p-6 m-4 w-full max-w-4xl">
     <h2 className="text-2xl font-bold text-center mb-4">ポモドーロタイマー</h2>
-    <div className='flex justify-center'><Tomato size={512}/></div>
+    <div className='flex justify-center'><Tomato size={512} color="red"/></div>
     <div className='three-timers flex flex-col items-center space-y-4'>
     </div>
 
     <h2 className="text-2xl font-bold text-center mb-4 mt-8">休憩タイマー</h2>
-    <div className='flex justify-center'><Tomato size={256}/><Tomato size={256}/><Tomato size={256}/></div>
+    <div className='flex justify-center'><Tomato size={256} color="yellow"/><Tomato size={256} color='orange'/><Tomato size={256} color='green'/></div>
     <div className="qk-timer-display text-4xl font-mono text-blue-600"></div>
   </div>
 

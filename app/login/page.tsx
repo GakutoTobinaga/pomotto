@@ -24,7 +24,7 @@ export default function Login() {
     <div className="w-full max-w-md overflow-hidden rounded-2xl border border-red-100 shadow-xl">
     <div className="pt-10 flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-red-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="flex justify-center"><Tomato size={128}/></div>
+        <div className="flex justify-center"><Tomato size={128} color="red"/></div>
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           ログインしてポモドーロしましょう。
         </h2>

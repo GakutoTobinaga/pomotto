@@ -28,7 +28,7 @@ export default function Navbar({
         <div className="flex h-16 justify-between">
           <div className="flex">
             <div className="flex flex-shrink-0 items-center">
-              <Tomato size={36}/>
+              <Tomato size={36} color='red'/>
             </div>
             <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               {navigation.map((item) => (
