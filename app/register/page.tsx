@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 
 export default async function Register() {
   async function signUpButton(formData: FormData) {
-    const username = formData.get("username") as string;
+    const username = formData.get('username') as string;
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const isRegisterd: boolean = await signUp(username, email, password);
@@ -35,7 +35,7 @@ export default async function Register() {
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form className="space-y-6" action={signUpButton}>
-              <div>
+                <div>
                   <label
                     htmlFor="username"
                     className="block text-sm font-medium leading-6 text-gray-900"
