@@ -5,14 +5,13 @@ import { redirect } from 'next/navigation';
 
 const supabase = createClient();
 
-export const signUp = async (email: string, password: string) => {
+export const signUp = async (username: string, email: string, password: string) => {
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
       data: {
-        firstname: 'John',
-        lastname: 'Doe',
+        username:  username,
       },
     },
   });
