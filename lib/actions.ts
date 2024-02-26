@@ -5,6 +5,22 @@ import { redirect } from 'next/navigation';
 
 const supabase = createClient();
 
+export const getSesson = async() => {
+  const {data: { session }} = await supabase.auth.getSession()
+  console.log(session)
+  redirect("/")
+}
+
+export const getSessionUsername = async () => {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    console.log(user.user_metadata.username)
+    return user.user_metadata.username
+  } else {
+    return null
+  }
+};
+
 export const signUp = async (
   username: string,
   email: string,
@@ -37,3 +53,8 @@ export const signIn = async (email: string, password: string) => {
   }
   return true;
 };
+
+export const signOut = async() => {
+  const { error } = await supabase.auth.signOut()
+  console.log(error)
+}

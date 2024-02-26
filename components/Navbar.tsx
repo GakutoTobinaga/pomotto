@@ -1,14 +1,27 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@tremor/react';
 import Link from 'next/link';
 import Tomato from './logos/Tomato';
+import { getSessionUsername, signOut } from '@/lib/actions';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar({}: {}) {
+  const [loggedInUser, setLoggedInUser] = useState("");
+
+  useEffect(() => {
+    // isLoggedIn関数を非同期で実行
+    const checkLoggedIn = async () => {
+      const fetchedUsername = await getSessionUsername();
+      setLoggedInUser(fetchedUsername)
+    };
+
+    checkLoggedIn();
+  }, []);
   const pathname = usePathname();
 
   const navigation = [
@@ -45,11 +58,9 @@ export default function Navbar({}: {}) {
             </div>
           </div>
           <div className="flex justify-center">
-            <div className="pt-5 pr-5">*Here will be displayed username*</div>
+            <div className="pt-5 pr-5">{loggedInUser}</div>
             <div className="pt-3">
-              <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                <Link href="/login">ログイン</Link>
-              </Button>
+              {loggedInUser ? <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" onClick={signOut}>ログアウト</Button> : <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><Link href="/login">ログイン</Link></Button>}
             </div>
           </div>
         </div>
