@@ -5,17 +5,21 @@ import { redirect } from 'next/navigation';
 
 const supabase = createClient();
 
-export const getSesson = async() => {
-  const {data: { session }} = await supabase.auth.getSession()
-}
+export const getSesson = async () => {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+};
 
 export const getSessionUsername = async () => {
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (user) {
-    console.log(user.user_metadata.username)
-    return user.user_metadata.username
+    console.log(user.user_metadata.username);
+    return user.user_metadata.username;
   } else {
-    return null
+    return null;
   }
 };
 
@@ -52,8 +56,8 @@ export const signIn = async (email: string, password: string) => {
   return true;
 };
 
-export const signOut = async() => {
-  const { error } = await supabase.auth.signOut()
-  console.log(error)
-  return error
-}
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  console.log(error);
+  return error;
+};
