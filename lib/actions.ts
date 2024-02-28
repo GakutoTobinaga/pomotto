@@ -7,8 +7,6 @@ const supabase = createClient();
 
 export const getSesson = async() => {
   const {data: { session }} = await supabase.auth.getSession()
-  console.log(session)
-  redirect("/")
 }
 
 export const getSessionUsername = async () => {
@@ -57,4 +55,5 @@ export const signIn = async (email: string, password: string) => {
 export const signOut = async() => {
   const { error } = await supabase.auth.signOut()
   console.log(error)
+  return error
 }

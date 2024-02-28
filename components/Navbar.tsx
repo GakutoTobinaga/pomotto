@@ -1,10 +1,15 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { Button } from '@tremor/react';
 import Link from 'next/link';
 import Tomato from './logos/Tomato';
 import { getSessionUsername, signOut } from '@/lib/actions';
+import { AuthError, createClient } from '@supabase/supabase-js'
+import { useRouter } from 'next/navigation';
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient('https://xygsnvodokdbcdbgvhda.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5Z3Nudm9kb2tkYmNkYmd2aGRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDgwNjI2MzcsImV4cCI6MjAyMzYzODYzN30.RCSW3nZSafJ6poXHNeuPMDSjeOtXmbRjw5IyOasmH1w')
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -12,7 +17,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar({}: {}) {
   const [loggedInUser, setLoggedInUser] = useState("");
-
+  const router = useRouter()
   useEffect(() => {
     // isLoggedIn関数を非同期で実行
     const checkLoggedIn = async () => {
@@ -23,6 +28,16 @@ export default function Navbar({}: {}) {
     checkLoggedIn();
   }, []);
   const pathname = usePathname();
+
+  const handleSignOut = async () => {
+      const isSignOutError : AuthError | null = await signOut()
+      if (isSignOutError) {
+        console.log("This is Auth error")
+      } else {
+        console.log("Logout success")
+      }
+  }
+  
 
   const navigation = [
     { name: 'ポモドーロ!', href: '/' },
@@ -60,7 +75,7 @@ export default function Navbar({}: {}) {
           <div className="flex justify-center">
             <div className="pt-5 pr-5">{loggedInUser}</div>
             <div className="pt-3">
-              {loggedInUser ? <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" onClick={signOut}>ログアウト</Button> : <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"><Link href="/login">ログイン</Link></Button>}
+              {loggedInUser ? <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" onClick={handleSignOut}>ログアウト</Button> : <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">ログイン</Button>}
             </div>
           </div>
         </div>
