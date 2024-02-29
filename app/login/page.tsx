@@ -3,8 +3,10 @@ import { redirect } from 'next/navigation';
 import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter();
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;

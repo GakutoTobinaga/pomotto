@@ -4,23 +4,23 @@ import { redirect, usePathname } from 'next/navigation';
 import { Button } from '@tremor/react';
 import Link from 'next/link';
 import Tomato from './logos/Tomato';
-import { getSessionUsername, signOut } from '@/lib/actions';
+import { getSessionUsername, signOut, listner } from '@/lib/actions';
 import { AuthError, createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-
-// Create a single supabase client for interacting with your database
-const supabase = createClient(
-  'https://xygsnvodokdbcdbgvhda.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5Z3Nudm9kb2tkYmNkYmd2aGRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDgwNjI2MzcsImV4cCI6MjAyMzYzODYzN30.RCSW3nZSafJ6poXHNeuPMDSjeOtXmbRjw5IyOasmH1w'
-);
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar({}: {}) {
-  const [loggedInUser, setLoggedInUser] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const router = useRouter();
+  useEffect(() => {
+    // listner 関数を呼び出し、返された解除処理を useEffect のクリーンアップ関数として設定
+    const unsubscribe = listner();
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     // isLoggedIn関数を非同期で実行
     const checkLoggedIn = async () => {
@@ -30,6 +30,7 @@ export default function Navbar({}: {}) {
 
     checkLoggedIn();
   }, []);
+
   const pathname = usePathname();
 
   const handleSignOut = async () => {
@@ -38,6 +39,8 @@ export default function Navbar({}: {}) {
       console.log('This is Auth error');
     } else {
       console.log('Logout success');
+      setLoggedInUser(null);
+      router.push('/login');
     }
   };
 
@@ -86,7 +89,7 @@ export default function Navbar({}: {}) {
                 </Button>
               ) : (
                 <Button className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
-                  ログイン
+                  <Link href="/login">ログイン</Link>
                 </Button>
               )}
             </div>
