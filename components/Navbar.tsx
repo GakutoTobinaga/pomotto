@@ -48,7 +48,9 @@ export default function Navbar({}: {}) {
     { name: 'ポモドーロ!', href: '/' },
     { name: 'ランキング', href: '/ranking' },
     { name: '登録', href: '/register' },
-    { name: 'ログイン', href: '/login' },
+    ...(loggedInUser
+      ? [{ name: 'マイページ', href: '/mypage' }]
+      : [{ name: 'ログイン', href: '/login' }]),
     { name: 'マイページ', href: '/mypage' },
   ];
   return (
