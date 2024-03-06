@@ -3,15 +3,20 @@ import { redirect } from 'next/navigation';
 import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
+import { getSessionUsername } from '@/lib/actions';
 
 export default function Login() {
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    const isLoggedIn: boolean = await signIn(email, password);
-    if (isLoggedIn) {
-      toast.success('ログインしました。');
-      redirect('/');
+    const isSignedIn: boolean = await signIn(email, password);
+
+    if (isSignedIn) {
+      const username = await getSessionUsername();
+      if (username) {
+        toast.success('ログインしました。');
+        window.location.href = '/';
+      }
     } else {
       toast.error('ログインに失敗しました。');
       redirect('/login');

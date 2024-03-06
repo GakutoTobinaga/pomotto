@@ -5,6 +5,24 @@ import { redirect } from 'next/navigation';
 
 const supabase = createClient();
 
+export const getSesson = async () => {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+};
+
+export const getSessionUsername = async () => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    console.log(user.user_metadata.username);
+    return user.user_metadata.username;
+  } else {
+    return null;
+  }
+};
+
 export const signUp = async (
   username: string,
   email: string,
@@ -36,4 +54,36 @@ export const signIn = async (email: string, password: string) => {
     return false;
   }
   return true;
+};
+
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  console.log(error);
+  return error;
+};
+
+export const listner = () => {
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    console.log(event, session);
+
+    if (event === 'INITIAL_SESSION') {
+      // handle initial session
+    } else if (event === 'SIGNED_IN') {
+      console.log('listner signin');
+      // handle sign in event
+    } else if (event === 'SIGNED_OUT') {
+      console.log('listner logout');
+      // handle sign out event
+    } else if (event === 'PASSWORD_RECOVERY') {
+      // handle password recovery event
+    } else if (event === 'TOKEN_REFRESHED') {
+      // handle token refreshed event
+    } else if (event === 'USER_UPDATED') {
+      // handle user updated event
+    }
+  });
+  // call unsubscribe to remove the callback
+  return () => {
+    data.subscription.unsubscribe();
+  };
 };
