@@ -1,11 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Button } from '@tremor/react';
 import Link from 'next/link';
 import Tomato from './logos/Tomato';
-import { getSessionUsername, signOut, listner } from '@/lib/actions';
-import { AuthError, createClient } from '@supabase/supabase-js';
+import { getSessionUsername, signOut } from '@/lib/actions';
+import { AuthError } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
 
 function classNames(...classes: string[]) {
@@ -15,11 +15,6 @@ function classNames(...classes: string[]) {
 export default function Navbar({}: {}) {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const router = useRouter();
-  useEffect(() => {
-    // listner 関数を呼び出し、返された解除処理を useEffect のクリーンアップ関数として設定
-    const unsubscribe = listner();
-    return unsubscribe;
-  }, []);
 
   useEffect(() => {
     // isLoggedIn関数を非同期で実行
@@ -27,7 +22,6 @@ export default function Navbar({}: {}) {
       const fetchedUsername = await getSessionUsername();
       setLoggedInUser(fetchedUsername);
     };
-
     checkLoggedIn();
   }, []);
 
@@ -51,7 +45,6 @@ export default function Navbar({}: {}) {
     ...(loggedInUser
       ? [{ name: 'マイページ', href: '/mypage' }]
       : [{ name: 'ログイン', href: '/login' }]),
-    { name: 'マイページ', href: '/mypage' },
   ];
   return (
     <div className="backdrop-blur sticky top-0 shadow-sm bg-green-200/50 border border-green-200 z-10">

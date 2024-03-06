@@ -1,6 +1,5 @@
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
-import Example from '@/components/RankBoard';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
