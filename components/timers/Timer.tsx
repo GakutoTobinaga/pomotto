@@ -31,17 +31,19 @@ export default function Timer({ size }: TimerProps) {
   }, [pause]);
 
   const playBeepSound = () => {
-    const audioContext = new window.AudioContext();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    if (typeof window !== 'undefined') {
+      const audioContext = new window.AudioContext();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
 
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
 
-    oscillator.frequency.value = 1000; // 1000Hzのビープ音
-    gainNode.gain.value = 0.1; // 音量を下げる
-    oscillator.start(audioContext.currentTime); // 今すぐ音を鳴らす
-    oscillator.stop(audioContext.currentTime + 0.5); // 0.5秒後に停止
+      oscillator.frequency.value = 1000; // 1000Hzのビープ音
+      gainNode.gain.value = 0.1; // 音量を下げる
+      oscillator.start(audioContext.currentTime); // 今すぐ音を鳴らす
+      oscillator.stop(audioContext.currentTime + 0.5); // 0.5秒後に停止
+    }
   };
   return (
     <div style={{ textAlign: 'center' }}>

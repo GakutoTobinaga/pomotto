@@ -4,7 +4,7 @@ import { signUp } from '@/lib/actions';
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
 
-export default async function Register() {
+export default function Register() {
   async function signUpButton(formData: FormData) {
     const username = formData.get('username') as string;
     const email = formData.get('email') as string;

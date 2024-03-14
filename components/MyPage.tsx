@@ -18,9 +18,9 @@ const userData = {
   region: 'Not selected',
 };
 
-export default async function MyPage() {
-  const sessionUsersData = await getUsersData();
-  console.log(sessionUsersData);
+export default function MyPage() {
+  //const sessionUsersData = await getUsersData();
+  //console.log(sessionUsersData);
   return (
     <>
       <div className="flex items-center justify-center h-screen">
