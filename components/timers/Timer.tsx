@@ -28,7 +28,9 @@ export default function Timer({ size }: TimerProps) {
     expiryTimestamp,
     onExpire: () => {
       if (isLoggedIn && totalPomodoro) {
-        setTotalPomodoro(totalPomodoro + 1), incrementUsersNumberOfPomodoro(), playBeepSound();
+        setTotalPomodoro(totalPomodoro + 1),
+          incrementUsersNumberOfPomodoro(),
+          playBeepSound();
       }
       if (!isLoggedIn) {
         setCount(count + 1), playBeepSound();

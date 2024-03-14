@@ -72,8 +72,7 @@ export default function Example() {
       <div className="flex w-screen items-center justify-center">
         <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-red-100 shadow-xl">
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-red-50">
-            <div className="flex justify-center text-2xl">
-            </div>
+            <div className="flex justify-center text-2xl"></div>
             <Table className="mt-8">
               <TableHead>
                 <TableRow className="border-b border-tremor-border dark:border-dark-tremor-border">
