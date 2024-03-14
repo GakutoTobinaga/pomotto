@@ -1,28 +1,35 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Description from '@/components/Description';
 import TomatoTimer from '@/components/timers/TomatoTimer';
+import TooltipForTimer from '@/components/tooltips/TooltipForTimer';
+
+const colors = ['red', 'yellow', 'orange', 'green'];
+
 export default function MainPage() {
+  const getRandomInt = (max: number) => {
+    return Math.floor(Math.random() * max);
+  };
+  const tomatoColor1 = colors[getRandomInt(4)];
+  const tomatoColor2 = colors[getRandomInt(4)];
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">
-        <h2 className="text-2xl font-bold text-center">ポモドーロタイマー</h2>
+        <div className="flex flex-row">
+          <TooltipForTimer />
+          <div className="ml-5 text-2xl font-bold text-center">
+            ポモドーロタイマー
+          </div>
+        </div>
         <div className="flex justify-center">
-          <TomatoTimer size="normal" color="red" />
+          <TomatoTimer size="normal" color={tomatoColor1} />
         </div>
         <h2 className="text-2xl font-bold text-center mb-4 mt-8">
           休憩タイマー
         </h2>
         <div className="flex flex-col space-y-4">
-          <div>
-            <TomatoTimer size="mini" color="yellow" />
-          </div>
           <div className="flex items-center">
             <div>
-              <TomatoTimer size="mini" color="orange" />
-            </div>
-            <div>
-              <TomatoTimer size="mini" color="green" />
+              <TomatoTimer size="mini" color={tomatoColor2} />
             </div>
           </div>
         </div>

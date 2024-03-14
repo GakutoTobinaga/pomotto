@@ -15,7 +15,6 @@ export const getSessionId = async () => {
     data: { user },
   } = await supabase.auth.getUser();
   if (user) {
-    console.log(user.id);
     return user.id;
   } else {
     return null;
@@ -109,6 +108,53 @@ export const getUsersData = async () => {
     console.error('Error fetching data:', error);
     return null;
   }
-
   return data;
+};
+
+export const getUsersPomodoroData = async () => {
+  const userId = await getSessionId();
+  const { data, error } = await supabase
+    .from('users_metadata')
+    .select('number_of_pomodoro')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+  return { data };
+};
+
+export const incrementUsersNumberOfPomodoro = async () => {
+  const userId = await getSessionId(); // 現在のユーザーIDを取得
+
+  // 現在の number_of_pomodoro の値を取得
+  const { data, error: fetchError } = await supabase
+    .from('users_metadata')
+    .select('number_of_pomodoro')
+    .eq('id', userId)
+    .single();
+
+  if (fetchError) {
+    console.error('Error fetching data:', fetchError);
+    return null;
+  }
+
+  // number_of_pomodoro の値に 1 を加える
+  const newNumberOfPomodoro = data.number_of_pomodoro + 1;
+
+  // 更新された値で number_of_pomodoro を更新
+  const { error: updateError } = await supabase
+    .from('users_metadata')
+    .update({ number_of_pomodoro: newNumberOfPomodoro })
+    .eq('id', userId);
+
+  if (updateError) {
+    console.error('Error updating data:', updateError);
+    return null;
+  }
+
+  // 更新が成功した場合、新しい number_of_pomodoro の値を返す
+  return newNumberOfPomodoro;
 };

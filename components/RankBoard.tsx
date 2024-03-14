@@ -55,37 +55,44 @@ const data = [
     pomodoroHours: '600',
     lastPomodoro: '2023-03-02',
   },
+  {
+    username: 'Gakutodesu',
+    name: 'Gakuto Tobinaga',
+    status: 'Inactive',
+    region: 'Japan',
+    streak: '23',
+    pomodoroHours: '1200',
+    lastPomodoro: '2023-03-03',
+  },
 ];
 
 export default function Example() {
   return (
     <>
-      <div className="flex h-screen w-screen items-center justify-center">
+      <div className="flex w-screen items-center justify-center">
         <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-red-100 shadow-xl">
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-red-50">
-            <div className="flex justify-center text-2xl">
-              Rank Board *Example*
-            </div>
+            <div className="flex justify-center text-2xl"></div>
             <Table className="mt-8">
               <TableHead>
                 <TableRow className="border-b border-tremor-border dark:border-dark-tremor-border">
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Username
+                    ユーザネーム
                   </TableHeaderCell>
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Status
+                    状態
                   </TableHeaderCell>
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Region
+                    地域
                   </TableHeaderCell>
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Streak
+                    最大ストリーク
                   </TableHeaderCell>
                   <TableHeaderCell className="text-right text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    PD-Hours
+                    総時間
                   </TableHeaderCell>
                   <TableHeaderCell className="text-right text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Last Pomodoro
+                    最終ポモドーロ
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
