@@ -1,6 +1,8 @@
 import React from 'react';
 import Description from '@/components/Description';
 import TomatoTimer from '@/components/timers/TomatoTimer';
+import TooltipForTimer from '@/components/tooltips/TooltipForTimer';
+
 const colors = ['red', 'yellow', 'orange', 'green'];
 
 export default function MainPage() {
@@ -12,7 +14,12 @@ export default function MainPage() {
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">
-        <h2 className="text-2xl font-bold text-center">ポモドーロタイマー</h2>
+        <div className="flex flex-row">
+          <TooltipForTimer />
+          <div className="ml-5 text-2xl font-bold text-center">
+            ポモドーロタイマー
+          </div>
+        </div>
         <div className="flex justify-center">
           <TomatoTimer size="normal" color={tomatoColor1} />
         </div>
