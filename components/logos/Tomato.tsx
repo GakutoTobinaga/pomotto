@@ -5,7 +5,7 @@ type TomatoColors = {
 
 interface TomatoProps {
   size: number;
-  color: 'red' | 'yellow' | 'orange' | 'green';
+  color: string;
 }
 
 const tomatoColors: { [key: string]: TomatoColors } = {

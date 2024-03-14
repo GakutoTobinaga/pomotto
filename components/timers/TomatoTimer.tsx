@@ -2,9 +2,10 @@
 import React from 'react';
 import Tomato from '@/components/logos/Tomato';
 import Timer from '@/components/timers/Timer';
-interface TomatoTimerProps {
+
+type TomatoTimerProps  = {
   size: 'mini' | 'normal';
-  color: 'red' | 'yellow' | 'orange' | 'green';
+  color: string;
 }
 
 // Tomatoのサイズを定義するオブジェクト
