@@ -1,4 +1,5 @@
 import Tomato from './logos/Tomato';
+import { getUsersPomodoroData } from '@/lib/actions';
 import { getUsersData } from '@/lib/actions';
 import {
   Table,
@@ -18,9 +19,11 @@ const userData = {
   region: 'Not selected',
 };
 
-export default function MyPage() {
+export default async function MyPage() {
   //const sessionUsersData = await getUsersData();
   //console.log(sessionUsersData);
+  const pomodoro = await getUsersPomodoroData();
+  pomodoro?.data.number_of_pomodoro;
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -44,7 +47,7 @@ export default function MyPage() {
                   Region: {userData.region}
                 </p>
                 <p className="font-semibold mt-2.5">
-                  Pomodoros: {userData.number_of_pomodoro}
+                  Pomodoros: {pomodoro?.data.number_of_pomodoro}
                 </p>
               </div>
             </div>
