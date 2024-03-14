@@ -1,37 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Description from '@/components/Description';
-import Tomato from '@/components/logos/Tomato';
 import TomatoTimer from '@/components/timers/TomatoTimer';
 export default function MainPage() {
-  {
-    /*
-  useEffect(() => {
-    if (time1 === 0) {
-      setErrorMessage('エラー: タイマーが0秒に達しました!');
-      clearInterval(timerId!);
-      setTimerId(null);
-    } else {
-      setErrorMessage('');
-    }
-  }, [time1, timerId]);
-
-  const watchReset = () => {
-    setTime1(1500)
-    if (timerId) clearInterval(timerId)
-    setTimerId(null)
-  }
-
-    // stopで確定したタイムを記録, 0の場合には記録しない
-  const saveLapTime = () => {
-    const number = 0
-    if (time1) {
-      setLapTimes([...lapTimes, time1])
-  }
-}
-*/
-  }
-
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">

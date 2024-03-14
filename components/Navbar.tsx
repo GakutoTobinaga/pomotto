@@ -77,7 +77,7 @@ export default function Navbar({}: {}) {
             <div className="pt-3">
               {loggedInUser ? (
                 <Button
-                  className="bg-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="bg-red-500 border-red-500 font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                   onClick={handleSignOut}
                 >
                   ログアウト

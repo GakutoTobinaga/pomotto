@@ -11,60 +11,52 @@ import {
 
 const data = [
   {
-    workspace: 'johndoe22',
-    owner: 'John Doe',
-    status: 'Live',
-    costs: '$3,509.00',
-    region: 'US-West 1',
-    capacity: '99%',
-    lastEdited: '23/09/2023 13:00',
+    username: "TheCreativeOne",
+    name: "Alex Doe",
+    status: "Active",
+    region: "North America",
+    streak: "5",
+    pomodoroHours: "200",
+    lastPomodoro: "2023-03-01"
   },
   {
-    workspace: 'illmissmycat',
-    owner: 'Jane Smith',
-    status: 'Live',
-    costs: '$5,720.00',
-    region: 'US-East 2',
-    capacity: '80%',
-    lastEdited: '22/09/2023 10:45',
+    username: "InnovatorSam",
+    name: "Samantha Smith",
+    status: "Inactive",
+    region: "Europe",
+    streak: "10",
+    pomodoroHours: "500",
+    lastPomodoro: "2023-02-24"
   },
   {
-    workspace: 'Dr. Clark',
-    owner: 'David Clark',
-    status: 'Inactive',
-    costs: '$800.00',
-    region: 'EU-Central 1',
-    capacity: '40%',
-    lastEdited: '25/09/2023 16:20',
+    username: "TechPioneer",
+    name: "Michael Brown",
+    status: "Active",
+    region: "Asia",
+    streak: "8",
+    pomodoroHours: "350",
+    lastPomodoro: "2023-03-05"
   },
   {
-    workspace: 'AgainSmith',
-    owner: 'Jake Smithfield',
-    status: 'Live',
-    costs: '$5,720.00',
-    region: 'US-East 2',
-    capacity: '80%',
-    lastEdited: '22/09/2023 10:45',
+    username: "DesignerJess",
+    name: "Jessica Jones",
+    status: "Active",
+    region: "South America",
+    streak: "7",
+    pomodoroHours: "300",
+    lastPomodoro: "2023-02-28"
   },
   {
-    workspace: 'Pr. Johnson',
-    owner: 'Mike Johnson',
-    status: 'Inactive',
-    costs: '$4,200.00',
-    region: 'EU-West 1',
-    capacity: '60%',
-    lastEdited: '21/09/2023 14:30',
-  },
-  {
-    workspace: 'ALICE0321',
-    owner: 'Alice Brown',
-    status: 'Inactive',
-    costs: '$2,100.00',
-    region: 'US-West 2',
-    capacity: '75%',
-    lastEdited: '24/09/2023 09:15',
-  },
+    username: "EntrepreneurDave",
+    name: "David Wilson",
+    status: "Inactive",
+    region: "Australia",
+    streak: "12",
+    pomodoroHours: "600",
+    lastPomodoro: "2023-03-02"
+  }
 ];
+
 
 export default function Example() {
   return (
@@ -82,9 +74,6 @@ export default function Example() {
                     Username
                   </TableHeaderCell>
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    RealName
-                  </TableHeaderCell>
-                  <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
                     Status
                   </TableHeaderCell>
                   <TableHeaderCell className="text-tremor-content-strong dark:text-dark-tremor-content-strong">
@@ -94,7 +83,7 @@ export default function Example() {
                     Streak
                   </TableHeaderCell>
                   <TableHeaderCell className="text-right text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                    Hours
+                    PD-Hours
                   </TableHeaderCell>
                   <TableHeaderCell className="text-right text-tremor-content-strong dark:text-dark-tremor-content-strong">
                     Last Pomodoro
@@ -104,19 +93,18 @@ export default function Example() {
               <TableBody>
                 {data.map((item) => (
                   <TableRow
-                    key={item.workspace}
+                    key={item.username}
                     className="even:bg-tremor-background-muted even:dark:bg-dark-tremor-background-muted"
                   >
                     <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                      {item.workspace}
+                      {item.username}
                     </TableCell>
-                    <TableCell>{item.owner}</TableCell>
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.region}</TableCell>
-                    <TableCell>{item.capacity}</TableCell>
-                    <TableCell className="text-right">{item.costs}</TableCell>
+                    <TableCell>{item.streak}</TableCell>
+                    <TableCell className="text-right">{item.pomodoroHours}</TableCell>
                     <TableCell className="text-right">
-                      {item.lastEdited}
+                      {item.lastPomodoro}
                     </TableCell>
                   </TableRow>
                 ))}
