@@ -3,10 +3,10 @@ import React from 'react';
 import Tomato from '@/components/logos/Tomato';
 import Timer from '@/components/timers/Timer';
 
-type TomatoTimerProps  = {
+type TomatoTimerProps = {
   size: 'mini' | 'normal';
   color: string;
-}
+};
 
 // Tomatoのサイズを定義するオブジェクト
 const TomatoSizeDescription = {

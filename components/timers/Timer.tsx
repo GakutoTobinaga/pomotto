@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 import { Button, Divider } from '@tremor/react';
+import {
+  getUsersPomodoroData,
+  incrementUsersNumberOfPomodoro,
+} from '@/lib/actions';
 
 const timerSizes = {
   mini: 300, // 5 minutes
@@ -15,20 +19,37 @@ interface TimerProps {
 
 export default function Timer({ size }: TimerProps) {
   // サイズに応じた秒数を取得
-  const [count, setCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [count, setCount] = useState<number>(0);
+  const [totalPomodoro, setTotalPomodoro] = useState<number | null>(null);
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + timerSizes[size]);
-
-  const { seconds, minutes, isRunning, start, pause, restart } = useTimer({
+  const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
-      setCount(count + 1), playBeepSound();
+      if (isLoggedIn) {
+        incrementUsersNumberOfPomodoro(), playBeepSound();
+      }
+      if (!isLoggedIn) {
+        setCount(count + 1), playBeepSound();
+      }
     },
     autoStart: false,
   });
   useEffect(() => {
     pause(); // 最初はタイマーを停止する
   }, [pause]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const sessionUserPomodoro = await getUsersPomodoroData();
+      if (sessionUserPomodoro) {
+        setTotalPomodoro(sessionUserPomodoro.data.number_of_pomodoro);
+        setIsLoggedIn(true);
+      }
+    };
+    fetchData();
+  }, []);
 
   const playBeepSound = () => {
     if (typeof window !== 'undefined') {
@@ -50,7 +71,11 @@ export default function Timer({ size }: TimerProps) {
       {size === 'normal' ? (
         <>
           <div className="text-4xl">合計ポモドーロ</div>
-          <div className="text-4xl">{count}</div>
+          {isLoggedIn ? (
+            <div className="text-4xl">{totalPomodoro}</div>
+          ) : (
+            <div className="text-4xl">{count}</div>
+          )}
         </>
       ) : (
         <></>

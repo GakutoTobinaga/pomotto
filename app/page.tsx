@@ -1,14 +1,14 @@
 import React from 'react';
 import Description from '@/components/Description';
 import TomatoTimer from '@/components/timers/TomatoTimer';
-const colors = [ "red", "yellow", "orange", "green"]
+const colors = ['red', 'yellow', 'orange', 'green'];
 
 export default function MainPage() {
-  const getRandomInt = (max : number) => {
+  const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
-  }
-  const tomatoColor1 = colors[getRandomInt(4)]
-  const tomatoColor2 = colors[getRandomInt(4)]
+  };
+  const tomatoColor1 = colors[getRandomInt(4)];
+  const tomatoColor2 = colors[getRandomInt(4)];
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">
@@ -20,10 +20,9 @@ export default function MainPage() {
           休憩タイマー
         </h2>
         <div className="flex flex-col space-y-4">
-
           <div className="flex items-center">
             <div>
-            <TomatoTimer size="mini" color={tomatoColor2} />
+              <TomatoTimer size="mini" color={tomatoColor2} />
             </div>
           </div>
         </div>
