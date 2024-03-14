@@ -10,21 +10,22 @@ const timerSizes = {
 };
 
 interface TimerProps {
-  size: 'mini' | 'normal' | "test";
+  size: 'mini' | 'normal' | 'test';
 }
 
 export default function Timer({ size }: TimerProps) {
   // サイズに応じた秒数を取得
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + timerSizes[size]);
 
   const { seconds, minutes, isRunning, start, pause, restart } = useTimer({
     expiryTimestamp,
-    onExpire: () => {setCount(count + 1), playBeepSound()},
+    onExpire: () => {
+      setCount(count + 1), playBeepSound();
+    },
     autoStart: false,
-  }
-  );
+  });
   useEffect(() => {
     pause(); // 最初はタイマーを停止する
   }, [pause]);
@@ -33,10 +34,10 @@ export default function Timer({ size }: TimerProps) {
     const audioContext = new window.AudioContext();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-  
+
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-  
+
     oscillator.frequency.value = 1000; // 1000Hzのビープ音
     gainNode.gain.value = 0.1; // 音量を下げる
     oscillator.start(audioContext.currentTime); // 今すぐ音を鳴らす
@@ -44,11 +45,14 @@ export default function Timer({ size }: TimerProps) {
   };
   return (
     <div style={{ textAlign: 'center' }}>
-      {size === "normal" ? <>
-      <div className='text-4xl'>合計ポモドーロ</div>
-      <div className='text-4xl'>{count}</div>
-      </>
-       : <></>}
+      {size === 'normal' ? (
+        <>
+          <div className="text-4xl">合計ポモドーロ</div>
+          <div className="text-4xl">{count}</div>
+        </>
+      ) : (
+        <></>
+      )}
       <div className="flex flex-col">
         <div className="font-mono text-6xl">
           <div>

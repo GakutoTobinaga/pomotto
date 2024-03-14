@@ -6,9 +6,9 @@ export default async function Notes() {
   // this file is still example datas.
   return (
     <>
-    <div className='h-screen'>
-      <MyPage />
-    </div>
+      <div className="h-screen">
+        <MyPage />
+      </div>
     </>
   );
 }

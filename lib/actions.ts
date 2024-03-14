@@ -101,12 +101,12 @@ export const listner = () => {
 export const getUsersData = async () => {
   const userId = await getSessionId();
   const { data, error } = await supabase
-    .from("users_metadata")
-    .select("*")
-    .eq("id", userId);
+    .from('users_metadata')
+    .select('*')
+    .eq('id', userId);
 
   if (error) {
-    console.error("Error fetching data:", error);
+    console.error('Error fetching data:', error);
     return null;
   }
 

@@ -11,52 +11,51 @@ import {
 
 const data = [
   {
-    username: "TheCreativeOne",
-    name: "Alex Doe",
-    status: "Active",
-    region: "North America",
-    streak: "5",
-    pomodoroHours: "200",
-    lastPomodoro: "2023-03-01"
+    username: 'TheCreativeOne',
+    name: 'Alex Doe',
+    status: 'Active',
+    region: 'North America',
+    streak: '5',
+    pomodoroHours: '200',
+    lastPomodoro: '2023-03-01',
   },
   {
-    username: "InnovatorSam",
-    name: "Samantha Smith",
-    status: "Inactive",
-    region: "Europe",
-    streak: "10",
-    pomodoroHours: "500",
-    lastPomodoro: "2023-02-24"
+    username: 'InnovatorSam',
+    name: 'Samantha Smith',
+    status: 'Inactive',
+    region: 'Europe',
+    streak: '10',
+    pomodoroHours: '500',
+    lastPomodoro: '2023-02-24',
   },
   {
-    username: "TechPioneer",
-    name: "Michael Brown",
-    status: "Active",
-    region: "Asia",
-    streak: "8",
-    pomodoroHours: "350",
-    lastPomodoro: "2023-03-05"
+    username: 'TechPioneer',
+    name: 'Michael Brown',
+    status: 'Active',
+    region: 'Asia',
+    streak: '8',
+    pomodoroHours: '350',
+    lastPomodoro: '2023-03-05',
   },
   {
-    username: "DesignerJess",
-    name: "Jessica Jones",
-    status: "Active",
-    region: "South America",
-    streak: "7",
-    pomodoroHours: "300",
-    lastPomodoro: "2023-02-28"
+    username: 'DesignerJess',
+    name: 'Jessica Jones',
+    status: 'Active',
+    region: 'South America',
+    streak: '7',
+    pomodoroHours: '300',
+    lastPomodoro: '2023-02-28',
   },
   {
-    username: "EntrepreneurDave",
-    name: "David Wilson",
-    status: "Inactive",
-    region: "Australia",
-    streak: "12",
-    pomodoroHours: "600",
-    lastPomodoro: "2023-03-02"
-  }
+    username: 'EntrepreneurDave',
+    name: 'David Wilson',
+    status: 'Inactive',
+    region: 'Australia',
+    streak: '12',
+    pomodoroHours: '600',
+    lastPomodoro: '2023-03-02',
+  },
 ];
-
 
 export default function Example() {
   return (
@@ -102,7 +101,9 @@ export default function Example() {
                     <TableCell>{item.status}</TableCell>
                     <TableCell>{item.region}</TableCell>
                     <TableCell>{item.streak}</TableCell>
-                    <TableCell className="text-right">{item.pomodoroHours}</TableCell>
+                    <TableCell className="text-right">
+                      {item.pomodoroHours}
+                    </TableCell>
                     <TableCell className="text-right">
                       {item.lastPomodoro}
                     </TableCell>
