@@ -19,11 +19,9 @@ const userData = {
   region: 'Not selected',
 };
 
-export default async function MyPage() {
+export default function MyPage() {
   //const sessionUsersData = await getUsersData();
   //console.log(sessionUsersData);
-  const pomodoro = await getUsersPomodoroData();
-  pomodoro?.data.number_of_pomodoro;
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -46,9 +44,7 @@ export default async function MyPage() {
                 <p className="font-semibold mt-2.5">
                   Region: {userData.region}
                 </p>
-                <p className="font-semibold mt-2.5">
-                  Pomodoros: {pomodoro?.data.number_of_pomodoro}
-                </p>
+                <p className="font-semibold mt-2.5">Pomodoros: NaN</p>
               </div>
             </div>
           </div>
