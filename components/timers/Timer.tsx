@@ -27,8 +27,8 @@ export default function Timer({ size }: TimerProps) {
   const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
-      if (isLoggedIn) {
-        incrementUsersNumberOfPomodoro(), playBeepSound();
+      if (isLoggedIn && totalPomodoro) {
+        setTotalPomodoro(totalPomodoro + 1), incrementUsersNumberOfPomodoro(), playBeepSound();
       }
       if (!isLoggedIn) {
         setCount(count + 1), playBeepSound();
@@ -70,11 +70,11 @@ export default function Timer({ size }: TimerProps) {
     <div style={{ textAlign: 'center' }}>
       {size === 'normal' ? (
         <>
-          <div className="text-4xl">合計ポモドーロ</div>
+          <div className="text-3xl">合計ポモドーロ</div>
           {isLoggedIn ? (
-            <div className="text-4xl">{totalPomodoro}</div>
+            <div className="text-8xl">{totalPomodoro}</div>
           ) : (
-            <div className="text-4xl">{count}</div>
+            <div className="text-8xl">{count}</div>
           )}
         </>
       ) : (
