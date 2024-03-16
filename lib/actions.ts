@@ -2,9 +2,8 @@
 import { headers } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-
+import { usePomodoro } from '@/contexts/PomodoroContext';
 const supabase = createClient();
-
 export const getSesson = async () => {
   const {
     data: { session },

@@ -29,17 +29,17 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
+      <PomodoroProvider>
       <body
         suppressHydrationWarning={true}
         className="bg-background text-foreground flex flex-col"
       >
-        <PomodoroProvider>
         <Navbar />
         <Toaster />
         {children}
         <Footer />
-        </PomodoroProvider>
       </body>
+      </PomodoroProvider>
     </html>
   );
 }

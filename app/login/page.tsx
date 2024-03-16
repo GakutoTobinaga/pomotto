@@ -4,8 +4,11 @@ import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
 import { getSessionUsername } from '@/lib/actions';
+import { usePomodoro } from '@/contexts/PomodoroContext';
+import Cookies from 'js-cookie';
 
 export default function Login() {
+  const {usersPomodoro, setUsersPomodoro} = usePomodoro()
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -14,8 +17,8 @@ export default function Login() {
     if (isSignedIn) {
       const username = await getSessionUsername();
       if (username) {
+        Cookies.set('pomodoro', '0', { expires: 7 });
         toast.success('ログインしました。');
-        window.location.href = '/';
       }
     } else {
       toast.error('ログインに失敗しました。');
