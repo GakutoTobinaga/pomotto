@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
-import { PomodoroProvider } from '@/contexts/PomodoroContext';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -29,7 +28,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <PomodoroProvider>
       <body
         suppressHydrationWarning={true}
         className="bg-background text-foreground flex flex-col"
@@ -39,7 +37,6 @@ export default function RootLayout({
         {children}
         <Footer />
       </body>
-      </PomodoroProvider>
     </html>
   );
 }
