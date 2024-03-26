@@ -6,7 +6,6 @@ import {
   getUsersPomodoroData,
   incrementUsersNumberOfPomodoro,
 } from '@/lib/actions';
-import { usePomodoro } from '@/contexts/PomodoroContext';
 import Cookies from 'js-cookie';
 
 const timerSizes = {
@@ -21,12 +20,11 @@ interface TimerProps {
 
 export default function Timer({ size }: TimerProps) {
   // サイズに応じた秒数を取得
-  const { usersPomodoro, setUsersPomodoro } = usePomodoro()
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [count, setCount] = useState<number>(0);
   const [totalPomodoro, setTotalPomodoro] = useState<number | null>(null);
   const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 5);
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + timerSizes.normal);
   const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
@@ -40,7 +38,7 @@ export default function Timer({ size }: TimerProps) {
           playBeepSound();
       }
       if (!isLoggedIn) {
-        setUsersPomodoro(usersPomodoro + 1), setCount(count + 1), playBeepSound();
+        setCount(count + 1), playBeepSound();
       }
     },
     autoStart: false,
