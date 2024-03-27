@@ -1,6 +1,6 @@
 'use server';
 import { createClient } from '@/utils/supabase/server';
-
+import { SessionUsersDataInterface } from './interfaces';
 const supabase = createClient();
 export const getSesson = async () => {
   const {
@@ -94,19 +94,20 @@ export const listner = () => {
   };
 };
 
-export const getUsersData = async () => {
-  const userId = await getSessionId();
-  const { data, error } = await supabase
-    .from('users_metadata')
-    .select('*')
-    .eq('id', userId);
+export const getSessionUsersData =
+  async (): Promise<SessionUsersDataInterface | null> => {
+    const userId = await getSessionId();
+    const { data, error } = await supabase
+      .from('users_metadata')
+      .select('*')
+      .eq('id', userId);
 
-  if (error) {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-  return data;
-};
+    if (error) {
+      console.error('Error fetching data:', error);
+      return null;
+    }
+    return data.length > 0 ? data[0] : null;
+  };
 
 export const getUsersPomodoroData = async () => {
   const userId = await getSessionId();

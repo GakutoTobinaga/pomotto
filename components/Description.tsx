@@ -1,3 +1,4 @@
+import Image from 'next/image';
 export default function Description() {
   return (
     <div className="space-y-4">
@@ -6,7 +7,7 @@ export default function Description() {
       </h1>
       <div className="mb-4">
         <div className="flex flex-row">
-          <img
+          <Image
             src="https://prtimes.jp/i/45990/6/resize/d45990-6-301422-2.jpg"
             alt="cirillo.jpg"
             className="inline-block w-32 h-32 mr-4 float-left"
