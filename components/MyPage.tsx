@@ -1,10 +1,20 @@
+'use client';
 import Tomato from './logos/Tomato';
+import { useState, useEffect } from 'react';
 import { getSessionUsersData } from '@/lib/actions';
 import { SessionUsersDataInterface } from '@/lib/interfaces';
 
-export default async function MyPage() {
-  const sessionUsersData: SessionUsersDataInterface | null =
-    await getSessionUsersData();
+export default function MyPage() {
+  const [sessionUsersData, setSessionUsersData] =
+    useState<SessionUsersDataInterface | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getSessionUsersData();
+      setSessionUsersData(data); // 取得したデータを状態に保存します
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <div className="pt-20 flex items-center justify-center">
