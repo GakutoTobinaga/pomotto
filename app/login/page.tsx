@@ -3,7 +3,8 @@ import { redirect } from 'next/navigation';
 import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
-import { getSessionUsername } from '@/lib/actions';
+import { getSessionUsername, setUsersTimeOfPomodoro } from '@/lib/actions';
+import Cookies from 'js-cookie';
 
 export default function Login() {
   async function signInButton(formData: FormData) {
@@ -14,8 +15,9 @@ export default function Login() {
     if (isSignedIn) {
       const username = await getSessionUsername();
       if (username) {
+        Cookies.set('pomodoro', '0', { expires: 7 });
+        setUsersTimeOfPomodoro(); //前回までのポモドーロ時間を集計する
         toast.success('ログインしました。');
-        window.location.href = '/';
       }
     } else {
       toast.error('ログインに失敗しました。');

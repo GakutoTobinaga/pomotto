@@ -32,7 +32,6 @@ export default function Navbar() {
     if (isSignOutError) {
       console.log('This is Auth error');
     } else {
-      console.log('Logout success');
       setLoggedInUser(null);
       router.push('/login');
     }
