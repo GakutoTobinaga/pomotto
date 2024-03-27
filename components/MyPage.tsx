@@ -1,31 +1,10 @@
 import Tomato from './logos/Tomato';
-import { getUsersPomodoroData } from '@/lib/actions';
 import { getSessionUsersData } from '@/lib/actions';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-  Card,
-} from '@tremor/react';
 import { SessionUsersDataInterface } from '@/lib/interfaces';
-const userData = {
-  id: '290215fb-a7c5-4678-bc5d-04d04fdc4f67',
-  username: 'gakutoxx',
-  number_of_pomodoro: 0,
-  time_of_pomodoro: null,
-  last_pomodoro: null,
-  region: 'Not selected',
-};
 
 export default async function MyPage() {
   const sessionUsersData: SessionUsersDataInterface | null =
     await getSessionUsersData();
-  if (sessionUsersData) {
-    console.log(sessionUsersData.last_pomodoro?.toLocaleString());
-  }
   return (
     <>
       <div className="pt-20 flex items-center justify-center">
@@ -35,7 +14,7 @@ export default async function MyPage() {
               {sessionUsersData?.username}
             </div>
             <div className="mt-8">
-              <div className="mt-6 w-fit mx-auto">
+              <div className="w-fit mx-auto">
                 {/* Tomato コンポーネントを表示 */}
                 <Tomato size={120} color="red" />
               </div>
