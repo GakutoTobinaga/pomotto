@@ -5,6 +5,7 @@ import { Button, Divider } from '@tremor/react';
 import {
   getUsersPomodoroData,
   incrementUsersNumberOfPomodoro,
+  addUsersLasttimePomodoro,
 } from '@/lib/actions';
 import Cookies from 'js-cookie';
 
@@ -24,17 +25,18 @@ export default function Timer({ size }: TimerProps) {
   const [count, setCount] = useState<number>(0);
   const [totalPomodoro, setTotalPomodoro] = useState<number | null>(null);
   const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + timerSizes.normal);
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 5);
   const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
       if (isLoggedIn && totalPomodoro) {
         const pomodoroValue = Cookies.get('pomodoro');
-        if(pomodoroValue){
-          console.log("pomodoro value is here")
+        if (pomodoroValue) {
+          console.log('pomodoro value is here');
         }
         setTotalPomodoro(totalPomodoro + 1),
           incrementUsersNumberOfPomodoro(),
+          addUsersLasttimePomodoro(),
           playBeepSound();
       }
       if (!isLoggedIn) {

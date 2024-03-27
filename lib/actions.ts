@@ -158,11 +158,36 @@ export const incrementUsersNumberOfPomodoro = async () => {
 
 export const addUsersLasttimePomodoro = async () => {
   const userId = await getSessionId();
-  const now = new Date()
+  const now = new Date();
   const { error: updateError } = await supabase
     .from('users_metadata')
     .update({ last_pomodoro: now })
     .eq('id', userId);
+  if (updateError) {
+    console.error('Error updating data:', updateError);
+    return false;
+  }
+  return true;
+};
+
+export const setUsersTimeOfPomodoro = async () => {
+  const userId = await getSessionId();
+  const { data, error: fetchError } = await supabase
+    .from('users_metadata')
+    .select('number_of_pomodoro')
+    .eq('id', userId)
+    .single();
+
+  if (fetchError) {
+    console.error('Error fetching data:', fetchError);
+    return null;
+  }
+  const usersTimeOfPomodoro = data.number_of_pomodoro * 25;
+  const { error: updateError } = await supabase
+    .from('users_metadata')
+    .update({ time_of_pomodoro: usersTimeOfPomodoro })
+    .eq('id', userId);
+
   if (updateError) {
     console.error('Error updating data:', updateError);
     return false;
