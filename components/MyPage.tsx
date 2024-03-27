@@ -20,13 +20,13 @@ export default async function MyPage() {
               </div>
               <div className="mt-8">
                 <p className="font-semibold mt-2.5">
+                  Pomodoros: {sessionUsersData?.number_of_pomodoro} times
+                </p>
+                <p className="font-semibold mt-2.5">
+                  Total pomodoro time: {sessionUsersData?.time_of_pomodoro} mins
+                </p>
+                <p className="font-semibold mt-2.5">
                   Region: {sessionUsersData?.region}
-                </p>
-                <p className="font-semibold mt-2.5">
-                  Pomodoros: {sessionUsersData?.number_of_pomodoro}
-                </p>
-                <p className="font-semibold mt-2.5">
-                  Total pomodoro minutes: {sessionUsersData?.time_of_pomodoro}
                 </p>
                 <p className="font-semibold mt-2.5">
                   Last pomodoro:{' '}
