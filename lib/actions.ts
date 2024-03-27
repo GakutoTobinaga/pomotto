@@ -1,8 +1,6 @@
 'use server';
-import { headers } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
-import { usePomodoro } from '@/contexts/PomodoroContext';
+
 const supabase = createClient();
 export const getSesson = async () => {
   const {
@@ -156,4 +154,18 @@ export const incrementUsersNumberOfPomodoro = async () => {
 
   // 更新が成功した場合、新しい number_of_pomodoro の値を返す
   return newNumberOfPomodoro;
+};
+
+export const addUsersLasttimePomodoro = async () => {
+  const userId = await getSessionId();
+  const now = new Date()
+  const { error: updateError } = await supabase
+    .from('users_metadata')
+    .update({ last_pomodoro: now })
+    .eq('id', userId);
+  if (updateError) {
+    console.error('Error updating data:', updateError);
+    return false;
+  }
+  return true;
 };
