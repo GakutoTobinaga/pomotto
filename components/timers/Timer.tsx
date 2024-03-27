@@ -25,7 +25,7 @@ export default function Timer({ size }: TimerProps) {
   const [count, setCount] = useState<number>(0);
   const [totalPomodoro, setTotalPomodoro] = useState<number | null>(null);
   const expiryTimestamp = new Date();
-  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 5);
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + timerSizes[size]);
   const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
