@@ -1,7 +1,7 @@
 'use client';
 import Tomato from './logos/Tomato';
 import { useState, useEffect } from 'react';
-import { getSessionUsersData } from '@/lib/actions';
+import { getSessionUsersData, getAllCountries } from '@/lib/actions';
 import { SessionUsersDataInterface } from '@/lib/interfaces';
 
 export default function MyPage() {
@@ -11,6 +11,7 @@ export default function MyPage() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getSessionUsersData();
+      const getCountries = await getAllCountries();
       setSessionUsersData(data); // 取得したデータを状態に保存します
     };
     fetchData();

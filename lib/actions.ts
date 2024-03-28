@@ -195,3 +195,19 @@ export const setUsersTimeOfPomodoro = async () => {
   }
   return true;
 };
+interface Country {
+  name: {
+    common: string;
+  };
+}
+export const getAllCountries = async (): Promise<string[]> => {
+  try {
+    const response = await fetch('https://restcountries.com/v3.1/all');
+    const countries: Country[] = await response.json();
+    const countryNames = countries.map((country) => country.name.common);
+    return countryNames;
+  } catch (error) {
+    console.error('Error:', error);
+    return [];
+  }
+};
