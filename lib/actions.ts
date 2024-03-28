@@ -1,6 +1,6 @@
 'use server';
 import { createClient } from '@/utils/supabase/server';
-import { SessionUsersDataInterface } from './interfaces';
+import { SessionUsersDataInterface, Country } from './interfaces';
 const supabase = createClient();
 export const getSesson = async () => {
   const {
@@ -195,11 +195,7 @@ export const setUsersTimeOfPomodoro = async () => {
   }
   return true;
 };
-interface Country {
-  name: {
-    common: string;
-  };
-}
+
 export const getAllCountries = async (): Promise<string[]> => {
   try {
     const response = await fetch('https://restcountries.com/v3.1/all');

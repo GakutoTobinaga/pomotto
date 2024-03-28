@@ -3,19 +3,30 @@ import Tomato from './logos/Tomato';
 import { useState, useEffect } from 'react';
 import { getSessionUsersData, getAllCountries } from '@/lib/actions';
 import { SessionUsersDataInterface } from '@/lib/interfaces';
+import { Button } from '@tremor/react';
+import RegionEditingModal from './RegionEditingModal';
 
 export default function MyPage() {
   const [sessionUsersData, setSessionUsersData] =
     useState<SessionUsersDataInterface | null>(null);
-
+  const [countries, setCountries] = useState<string[]>([]);
+  const [isEditing, setIsEditing] = useState<true | false>(false);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getSessionUsersData();
       const getCountries = await getAllCountries();
+      setCountries(getCountries);
       setSessionUsersData(data); // 取得したデータを状態に保存します
     };
     fetchData();
   }, []);
+  const Edit = () => {
+    setIsEditing(!isEditing);
+  };
+  const Save = () => {
+    setIsEditing(!isEditing);
+    console.log('saving');
+  };
   return (
     <>
       <div className="pt-20 flex items-center justify-center">
@@ -36,6 +47,20 @@ export default function MyPage() {
                 <p className="font-semibold mt-2.5">
                   Total pomodoro time: {sessionUsersData?.time_of_pomodoro} mins
                 </p>
+                {isEditing ? (
+                  <p className="font-semibold mt-2.5">
+                    Region: <RegionEditingModal />
+                  </p>
+                ) : (
+                  <p className="font-semibold mt-2.5">
+                    Region: {sessionUsersData?.region}
+                  </p>
+                )}
+                {isEditing ? (
+                  <Button onClick={Save}>保存</Button>
+                ) : (
+                  <Button onClick={Edit}>編集開始</Button>
+                )}
                 <p className="font-semibold mt-2.5">
                   Region: {sessionUsersData?.region}
                 </p>
