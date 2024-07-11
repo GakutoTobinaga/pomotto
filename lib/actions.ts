@@ -55,7 +55,8 @@ export const signIn = async (email: string, password: string) => {
     email,
     password,
   });
-
+  const session = data.session?.user.aud;
+  console.log(session)
   if (error) {
     return false;
   }
@@ -68,31 +69,6 @@ export const signOut = async () => {
   return error;
 };
 
-export const listner = () => {
-  const { data } = supabase.auth.onAuthStateChange((event, session) => {
-    console.log(event, session);
-
-    if (event === 'INITIAL_SESSION') {
-      // handle initial session
-    } else if (event === 'SIGNED_IN') {
-      console.log('listner signin');
-      // handle sign in event
-    } else if (event === 'SIGNED_OUT') {
-      console.log('listner logout');
-      // handle sign out event
-    } else if (event === 'PASSWORD_RECOVERY') {
-      // handle password recovery event
-    } else if (event === 'TOKEN_REFRESHED') {
-      // handle token refreshed event
-    } else if (event === 'USER_UPDATED') {
-      // handle user updated event
-    }
-  });
-  // call unsubscribe to remove the callback
-  return () => {
-    data.subscription.unsubscribe();
-  };
-};
 
 export const getSessionUsersData =
   async (): Promise<SessionUsersDataInterface | null> => {

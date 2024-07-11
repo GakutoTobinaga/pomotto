@@ -13,7 +13,6 @@ export default function MainPage() {
   const tomatoColor1 = colors[getRandomInt(4)];
   const tomatoColor2 = colors[getRandomInt(4)];
   const sortedCountries = countries.sort();
-  console.log(sortedCountries);
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">

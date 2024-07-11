@@ -25,7 +25,7 @@ export default function MyPage() {
   };
   const Save = () => {
     setIsEditing(!isEditing);
-    console.log('saving');
+    console.log('saved');
   };
   return (
     <>
@@ -49,7 +49,7 @@ export default function MyPage() {
                 </p>
                 {isEditing ? (
                   <p className="font-semibold mt-2.5">
-                    Region: <RegionEditingModal />
+                    Region: <RegionEditingModal country="Japan"/>
                   </p>
                 ) : (
                   <p className="font-semibold mt-2.5">
