@@ -1,6 +1,7 @@
 'use server';
 import { createClient } from '@/utils/supabase/server';
 import { SessionUsersDataInterface, Country } from './interfaces';
+import { AuthError, User } from '@supabase/supabase-js';
 const supabase = createClient();
 export const getSesson = async () => {
   const {
@@ -50,17 +51,16 @@ export const signUp = async (
   return true;
 };
 
-export const signIn = async (email: string, password: string) => {
+export const signIn = async (email: string, password: string) : Promise<User>=> {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
-  const session = data.session?.user.aud;
-  console.log(session)
   if (error) {
-    return false;
+    throw error;
   }
-  return true;
+  const sessionUser : User = data.session?.user
+  return sessionUser
 };
 
 export const signOut = async () => {
@@ -68,7 +68,6 @@ export const signOut = async () => {
   console.log(error);
   return error;
 };
-
 
 export const getSessionUsersData =
   async (): Promise<SessionUsersDataInterface | null> => {

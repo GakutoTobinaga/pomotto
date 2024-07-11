@@ -5,21 +5,18 @@ import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
 import { getSessionUsername, setUsersTimeOfPomodoro } from '@/lib/actions';
+import { AuthError, User } from '@supabase/supabase-js';
 
 export default function Login() {
-  const router = useRouter();
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    const isSignedIn: boolean = await signIn(email, password);
-
-    if (isSignedIn) {
-      const username = await getSessionUsername();
-      if (username) {
-        setUsersTimeOfPomodoro(); //前回までのポモドーロ時間を集計する
+    const user : User = await signIn(email, password);
+    if(user){
+      setUsersTimeOfPomodoro(); //前回までのポモドーロ時間を集計する
+      sessionStorage.setItem('user', JSON.stringify(user.user_metadata));
         toast.success('ログインしました。');
-        redirect("/")
-      }
+        redirect('/');
     } else {
       toast.error('ログインに失敗しました。');
       redirect('/login');
