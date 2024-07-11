@@ -1,11 +1,13 @@
 'use client';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Tomato from '@/components/logos/Tomato';
 import { signIn } from '@/lib/actions';
 import toast from 'react-hot-toast';
 import { getSessionUsername, setUsersTimeOfPomodoro } from '@/lib/actions';
 
 export default function Login() {
+  const router = useRouter();
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -16,6 +18,7 @@ export default function Login() {
       if (username) {
         setUsersTimeOfPomodoro(); //前回までのポモドーロ時間を集計する
         toast.success('ログインしました。');
+        redirect("/")
       }
     } else {
       toast.error('ログインに失敗しました。');

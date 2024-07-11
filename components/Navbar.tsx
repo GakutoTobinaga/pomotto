@@ -13,6 +13,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [loggedInUser, setLoggedInUser] = useState(null);
   const router = useRouter();
 
@@ -23,9 +24,7 @@ export default function Navbar() {
       setLoggedInUser(fetchedUsername);
     };
     checkLoggedIn();
-  }, []);
-
-  const pathname = usePathname();
+  }, [pathname]);
 
   const handleSignOut = async () => {
     const isSignOutError: AuthError | null = await signOut();
