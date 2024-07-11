@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
+import { NextResponse } from 'next/server';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
