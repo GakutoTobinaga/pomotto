@@ -2,6 +2,7 @@ import React from 'react';
 import Description from '@/components/Description';
 import TomatoTimer from '@/components/timers/TomatoTimer';
 import TooltipForTimer from '@/components/tooltips/TooltipForTimer';
+import { countries } from '@/lib/interfaces';
 
 const colors = ['red', 'yellow', 'orange', 'green'];
 
@@ -11,6 +12,7 @@ export default function MainPage() {
   };
   const tomatoColor1 = colors[getRandomInt(4)];
   const tomatoColor2 = colors[getRandomInt(4)];
+  const sortedCountries = countries.sort();
   return (
     <>
       <div className="timer flex flex-col items-center justify-center p-4">
