@@ -13,25 +13,30 @@ function classNames(...classes: string[]) {
 }
 
 export default function Navbar() {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const pathname = usePathname();
+  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     // isLoggedIn関数を非同期で実行
-    const checkLoggedIn = async () => {
-      const fetchedUsername = await getSessionUsername();
-      setLoggedInUser(fetchedUsername);
-    };
-    checkLoggedIn();
-  }, []);
-
-  const pathname = usePathname();
+    const cachedUser = JSON.parse(sessionStorage.getItem('user') || 'null');
+    if (cachedUser) {
+      const username = cachedUser.username;
+      setLoggedInUser(username);
+    }
+    // const checkLoggedIn = async () => {
+    //   const fetchedUsername = await getSessionUsername();
+    //   setLoggedInUser(fetchedUsername);
+    // };
+    // checkLoggedIn();
+  }, [pathname]);
 
   const handleSignOut = async () => {
     const isSignOutError: AuthError | null = await signOut();
     if (isSignOutError) {
       console.log('This is Auth error');
     } else {
+      sessionStorage.removeItem('user');
       setLoggedInUser(null);
       router.push('/login');
     }
