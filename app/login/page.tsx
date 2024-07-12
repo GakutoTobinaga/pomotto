@@ -11,12 +11,12 @@ export default function Login() {
   async function signInButton(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    const user : User = await signIn(email, password);
-    if(user){
+    const user: User = await signIn(email, password);
+    if (user) {
       setUsersTimeOfPomodoro(); //前回までのポモドーロ時間を集計する
       sessionStorage.setItem('user', JSON.stringify(user.user_metadata));
-        toast.success('ログインしました。');
-        redirect('/');
+      toast.success('ログインしました。');
+      redirect('/');
     } else {
       toast.error('ログインに失敗しました。');
       redirect('/login');

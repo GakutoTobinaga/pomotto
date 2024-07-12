@@ -5,14 +5,7 @@ import { getSessionUsersData, getAllCountries } from '@/lib/actions';
 import { SessionUsersDataInterface } from '@/lib/interfaces';
 import { Button } from '@tremor/react';
 import RegionEditingModal from './RegionEditingModal';
-import { createBrowserClient } from '@supabase/ssr';
-import { User } from '@supabase/supabase-js';
-const supabase = createBrowserClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
 export default function MyPage() {
-
   const [user, setUser] = useState<any>(null);
   const [sessionUsersData, setSessionUsersData] =
     useState<SessionUsersDataInterface | null>(null);
@@ -21,7 +14,7 @@ export default function MyPage() {
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem('user') || 'null');
     if (user) {
-      const username = user.username
+      const username = user.username;
       setUser(username);
     }
     const fetchData = async () => {
@@ -44,9 +37,7 @@ export default function MyPage() {
       <div className="pt-20 flex items-center justify-center">
         <div className="w-full max-w-xl overflow-hidden rounded-2xl border border-red-100 shadow-xl">
           <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-red-50">
-            <div className="flex justify-center text-2xl font-bold">
-            {user}
-            </div>
+            <div className="flex justify-center text-2xl font-bold">{user}</div>
             <div className="mt-8">
               <div className="w-fit mx-auto">
                 {/* Tomato コンポーネントを表示 */}

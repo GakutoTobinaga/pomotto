@@ -20,9 +20,9 @@ export default function Navbar() {
   useEffect(() => {
     // isLoggedIn関数を非同期で実行
     const cachedUser = JSON.parse(sessionStorage.getItem('user') || 'null');
-    if(cachedUser){
-      const username = cachedUser.username
-      setLoggedInUser(username)
+    if (cachedUser) {
+      const username = cachedUser.username;
+      setLoggedInUser(username);
     }
     // const checkLoggedIn = async () => {
     //   const fetchedUsername = await getSessionUsername();
@@ -36,7 +36,7 @@ export default function Navbar() {
     if (isSignOutError) {
       console.log('This is Auth error');
     } else {
-      sessionStorage.removeItem("user")
+      sessionStorage.removeItem('user');
       setLoggedInUser(null);
       router.push('/login');
     }

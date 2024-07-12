@@ -51,7 +51,10 @@ export const signUp = async (
   return true;
 };
 
-export const signIn = async (email: string, password: string) : Promise<User>=> {
+export const signIn = async (
+  email: string,
+  password: string
+): Promise<User> => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -59,8 +62,8 @@ export const signIn = async (email: string, password: string) : Promise<User>=> 
   if (error) {
     throw error;
   }
-  const sessionUser : User = data.session?.user
-  return sessionUser
+  const sessionUser: User = data.session?.user;
+  return sessionUser;
 };
 
 export const signOut = async () => {
